@@ -27,7 +27,7 @@ url = "https://www.popmart.com/my/largeShoppingCart"
 
 # Initialize Chrome driver
 options = get_chrome_options()
-driver = uc.Chrome(executable_path="C:\\Users\\Jerry\\Downloads\\chromedriver-win64\\chromedriver-win64", options=options)
+driver = uc.Chrome(executable_path="E:\autojjat", options=options)
 
 try:
     # Open the URL
