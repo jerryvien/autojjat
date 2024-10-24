@@ -70,8 +70,8 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
     # Disable images, CSS, and other unnecessary resources to improve speed
     chrome_prefs = {
         "profile.default_content_setting_values": {
-            "images": 1,  # Disable images
-            "stylesheet": 1,  # Disable stylesheets
+            "images": 2,  # Disable images
+            "stylesheet": 2,  # Disable stylesheets
             "cookies": 1,
             "javascript": 1,
             "plugins": 1,
