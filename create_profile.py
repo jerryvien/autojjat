@@ -59,12 +59,11 @@ def rotate_ip_and_browse(target_url):
         driver.get(target_url)
         print(f"Successfully opened URL: {target_url}")
 
-        # Wait for a few seconds to simulate browsing
-        time.sleep(10)
+       
 
     finally:
         # Close the browser
-        driver.quit()
+        
         print("Browser closed.")
 
 if __name__ == "__main__":
