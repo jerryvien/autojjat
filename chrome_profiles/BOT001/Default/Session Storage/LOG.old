@@ -1,8 +1,14 @@
-2024/10/24-20:28:46.306 5e44 Reusing MANIFEST e:\autojjat\chrome_profiles\BOT001\Default\Session Storage/MANIFEST-000001
-2024/10/24-20:28:46.306 5e44 Recovering log #4
-2024/10/24-20:28:46.307 5e44 Level-0 table #6: started
-2024/10/24-20:28:46.316 5e44 Level-0 table #6: 13271 bytes OK
-2024/10/24-20:28:46.316 5e44 Recovering log #6
-2024/10/24-20:28:46.317 5e44 Reusing old log e:\autojjat\chrome_profiles\BOT001\Default\Session Storage/000006.log 
-2024/10/24-20:28:46.320 5e44 Delete type=0 #4
-2024/10/24-20:28:46.320 5e44 Delete type=2 #7
+2024/10/24-22:33:11.326 2b2c Reusing MANIFEST e:\autojjat\chrome_profiles\BOT001\Default\Session Storage/MANIFEST-000001
+2024/10/24-22:33:11.327 2b2c Recovering log #8
+2024/10/24-22:33:11.329 2b2c Reusing old log e:\autojjat\chrome_profiles\BOT001\Default\Session Storage/000008.log 
+2024/10/24-22:33:13.780 555c Level-0 table #12: started
+2024/10/24-22:33:13.784 555c Level-0 table #12: 11846 bytes OK
+2024/10/24-22:33:13.786 555c Delete type=0 #8
+2024/10/24-22:33:13.786 555c Compacting 4@0 + 0@1 files
+2024/10/24-22:33:13.794 555c Generated table #13@0: 3 keys, 228 bytes
+2024/10/24-22:33:13.794 555c Compacted 4@0 + 0@1 files => 228 bytes
+2024/10/24-22:33:13.796 555c compacted to: files[ 0 1 0 0 0 0 0 ]
+2024/10/24-22:33:13.796 555c Delete type=2 #3
+2024/10/24-22:33:13.796 555c Delete type=2 #6
+2024/10/24-22:33:13.796 555c Delete type=2 #9
+2024/10/24-22:33:13.796 555c Delete type=2 #12

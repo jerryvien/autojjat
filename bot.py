@@ -73,7 +73,7 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=False):
                 refresh_element(driver, checkout_button_xpath)
 
                 # Wait for the button to be present in the DOM and clickable (reduced wait time)
-                wait = WebDriverWait(driver, 5)  # Reduced wait time to ensure element is present
+                wait = WebDriverWait(driver, 1)  # Reduced wait time to ensure element is present
                 checkout_button = wait.until(
                     EC.element_to_be_clickable((By.XPATH, checkout_button_xpath))
                 )
@@ -84,7 +84,7 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=False):
                 print("Checkout button clicked.")
 
                 # Monitor URL change using a polling mechanism for faster detection
-                if fast_monitor_url_change(driver, checkout_url, timeout=5, poll_frequency=0.1):
+                if fast_monitor_url_change(driver, checkout_url, timeout=0.1, poll_frequency=0.1):
                     print("URL changed successfully. Action was successful.")
                     break
                 else:
