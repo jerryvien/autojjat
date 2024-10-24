@@ -44,6 +44,8 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
         }
     }
     chrome_options.experimental_options["prefs"] = chrome_prefs
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-gpu')
 
     # Apply proxy settings if use_proxy is True
     if use_proxy:
@@ -57,6 +59,7 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
         chrome_options.add_argument('--disable-gpu')
 
     # Initialize undetected Chrome with the selected profile and proxy settings
+
     driver = uc.Chrome(options=chrome_options)
 
     try:
@@ -77,8 +80,6 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
                 )
                 print("Checkout button is found and clickable.")
 
-                # Scroll to the button and click
-                driver.execute_script("arguments[0].scrollIntoView(true);", checkout_button)
                 checkout_button.click()
                 print("Checkout button clicked.")
 
