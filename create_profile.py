@@ -57,11 +57,11 @@ def rotate_ip_and_browse(target_url, profile_directory, profile_name):
     
     # Arguments to reduce browser traffic
     chrome_options.add_argument("--disable-extensions")  # Disable extensions
-    chrome_options.add_argument("--disable-gpu")  # Disable GPU
+    #chrome_options.add_argument("--disable-gpu")  # Disable GPU
     chrome_options.add_argument("--disable-images")  # Disable images (handled in blink settings below)
     chrome_options.add_argument("--disable-animations")  # Disable animations
     chrome_options.add_argument("--blink-settings=imagesEnabled=false")  # Disable loading images
-    chrome_options.add_argument("--disable-blink-features=AutomationControlled")  # Disable automation flag detection
+    #chrome_options.add_argument("--disable-blink-features=AutomationControlled")  # Disable automation flag detection
     chrome_options.add_argument("--no-sandbox")  # Disable sandboxing
     chrome_options.add_argument("--disable-setuid-sandbox")  # Disable setuid sandbox
 
