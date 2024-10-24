@@ -47,14 +47,15 @@ def start_chrome_with_profile(profile_path, proxy):
         # Keep clicking the checkout button until the URL changes
         while True:
             try:
-                # Wait for the button to be present in the DOM and visible on the page
+                # Wait for the button to be present in the DOM and clickable
                 wait = WebDriverWait(driver, 30)  # Longer wait time to ensure element is present
                 checkout_button = wait.until(
-                    EC.visibility_of_element_located((By.XPATH, checkout_button_xpath))
+                    EC.element_to_be_clickable((By.XPATH, checkout_button_xpath))
                 )
+                print("Checkout button is found and clickable.")
 
                 # Scroll to the button and click
-                driver.execute_script("arguments[0].scrollIntoView(true);", checkout_button)
+                #driver.execute_script("arguments[0].scrollIntoView(true);", checkout_button)
                 checkout_button.click()
                 print("Checkout button clicked.")
 
