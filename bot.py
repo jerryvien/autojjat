@@ -1,6 +1,10 @@
 import sys
 import os
 import undetected_chromedriver as uc
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
 
 # IPRoyal Proxy Configuration (with whitelisting, so no authentication needed)
 proxy_host = 'geo.iproyal.com'
@@ -8,6 +12,7 @@ proxy_port = '11248'  # Updated proxy port
 
 # PopMart URLs
 checkout_url = "https://www.popmart.com/my/largeShoppingCart"
+checkout_button_xpath = '//*[@id="__next"]/div/div/div[2]/div/div[2]/div[2]/div[3]/button'
 
 # Function to get a new proxy (simulated for this script)
 def get_new_proxy():
@@ -33,10 +38,31 @@ def start_chrome_with_profile(profile_path, proxy):
         driver.get(checkout_url)
         print(f"Navigated to checkout page for profile at '{profile_path}'.")
 
-        # The browser will remain open for user actions
-        print(f"Browser for profile at '{profile_path}' will remain open. Close it manually when done.")
+        # Get the initial URL before clicking the button
+        initial_url = driver.current_url
 
-        # Run indefinitely until the browser is manually closed
+        # Keep clicking the checkout button until the URL changes
+        while True:
+            try:
+                checkout_button = driver.find_element(By.XPATH, checkout_button_xpath)
+                driver.execute_script("arguments[0].scrollIntoView(true);", checkout_button)
+                checkout_button.click()
+                print("Checkout button clicked.")
+
+                # Monitor URL change to verify if the action was successful
+                if monitor_url_change(driver, initial_url):
+                    print("URL changed successfully. Action was successful.")
+                    break
+                else:
+                    print("URL did not change. Retrying click in 3 seconds...")
+                    
+
+            except Exception as e:
+                print(f"An error occurred while trying to click the checkout button: {e}")
+                
+
+        # Keep the browser open
+        #print(f"Browser for profile at '{profile_path}' will remain open. Close it manually when done.")
         while True:
             pass
 
@@ -47,6 +73,18 @@ def start_chrome_with_profile(profile_path, proxy):
         # Close the browser when the script is manually stopped
         driver.quit()
         print(f"Browser for profile '{profile_path}' closed.")
+
+# Function to monitor URL change after clicking the button
+def monitor_url_change(driver, initial_url, timeout=10):
+    """
+    Monitors the URL change to confirm if the action was successful.
+    Returns True if the URL changes, otherwise False.
+    """
+    try:
+        WebDriverWait(driver, timeout).until(lambda d: d.current_url != initial_url)
+        return True
+    except:
+        return False
 
 if __name__ == "__main__":
     # Ensure that the profile path is provided
