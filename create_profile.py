@@ -1,52 +1,74 @@
-import os
 import requests
+import undetected_chromedriver as uc
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
 
-# Function to get a new proxy from IP Royal API
-def get_new_proxy(api_key):
-    url = "https://api.iproyal.com/get-proxy"
-    headers = {"Authorization": f"Bearer {api_key}"}
-    response = requests.get(url, headers=headers)
-    
-    if response.status_code == 200:
-        proxy_info = response.json()
-        return {
-            "ip": proxy_info["ip"],
-            "port": proxy_info["port"],
-            "username": proxy_info.get("username"),
-            "password": proxy_info.get("password")
-        }
-    else:
-        raise Exception(f"Failed to get new proxy: {response.status_code}, {response.text}")
+# URL to get the current public IP address
+url = 'https://ipv4.icanhazip.com'
 
-# Function to create user profiles
-def create_user_profiles(num_profiles, current_directory, api_key):
-    user_profiles = []
-    for i in range(1, num_profiles + 1):
-        profile_name = f"BOT{i:03d}"  # Creates BOT001, BOT002, etc.
-        profile_path = os.path.join(current_directory, "chrome_profiles", profile_name)
-        os.makedirs(profile_path, exist_ok=True)  # Create directory if it doesn't exist
-        proxy = get_new_proxy(api_key)
-        
-        # Save proxy info to a file for each profile
-        proxy_file = os.path.join(profile_path, "proxy_info.txt")
-        with open(proxy_file, "w") as f:
-            f.write(f"ip={proxy['ip']}\n")
-            f.write(f"port={proxy['port']}\n")
-            if proxy.get("username") and proxy.get("password"):
-                f.write(f"username={proxy['username']}\n")
-                f.write(f"password={proxy['password']}\n")
+# IP Royal Proxy Configuration
+proxy_host = 'geo.iproyal.com'
+proxy_port = '12321'
+proxy_username = 'iproyal4174'
+proxy_password = 'dfIjovni'
 
-        user_profiles.append(profile_path)
-        print(f"Profile created: {profile_name} with proxy {proxy['ip']}:{proxy['port']}")
+# Construct the proxy URL with authentication
+proxy = f'{proxy_username}:{proxy_password}@{proxy_host}:{proxy_port}'
 
-    return user_profiles
+# Define the proxies dictionary for HTTP and HTTPS
+proxies = {
+    'http': f'http://{proxy}',
+    'https': f'http://{proxy}'
+}
+
+# Function to get public IP address
+def get_public_ip(proxies=None):
+    try:
+        response = requests.get(url, proxies=proxies)
+        response.raise_for_status()  # Raise an HTTPError for bad responses
+        return response.text.strip()
+    except requests.exceptions.RequestException as e:
+        return f"Error occurred: {e}"
+
+# Function to rotate IP using IP Royal and open an undetected Chrome browser
+def rotate_ip_and_browse(target_url):
+    # Step 1: Show current IP without proxy
+    print("Fetching current IP without proxy...")
+    current_ip = get_public_ip()
+    print(f"Current IP: {current_ip}\n")
+
+    # Step 2: Show the IP after applying the proxy
+    print("Fetching IP using IP Royal proxy...")
+    proxy_ip = get_public_ip(proxies=proxies)
+    print(f"Proxy IP: {proxy_ip}\n")
+
+    # Step 3: Start an undetected browser with the proxy and visit the target URL
+    print("Starting undetected Chrome browser with the new proxy...")
+
+    # Configure Chrome options with the proxy
+    chrome_options = uc.ChromeOptions()
+    chrome_options.add_argument(f'--proxy-server=http://{proxy_host}:{proxy_port}')
+
+    # Initialize undetected Chrome with the proxy settings
+    driver = uc.Chrome(options=chrome_options)
+
+    try:
+        # Open the target URL
+        driver.get(target_url)
+        print(f"Successfully opened URL: {target_url}")
+
+        # Wait for a few seconds to simulate browsing
+        time.sleep(10)
+
+    finally:
+        # Close the browser
+        driver.quit()
+        print("Browser closed.")
 
 if __name__ == "__main__":
-    api_key = "YOUR_IP_ROYAL_API_KEY"
-    num_profiles = 3  # Define how many profiles you want to create
+    target_url = "https://www.popmart.com/my"
 
-    # Determine the current working directory
-    current_directory = os.path.dirname(os.path.abspath(__file__))
-
-    # Create user profiles
-    create_user_profiles(num_profiles, current_directory, api_key)
+    # Rotate IP and open browser to visit the target URL
+    rotate_ip_and_browse(target_url)
