@@ -65,8 +65,8 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
     # Define Chrome options with user data directory
     chrome_options = uc.ChromeOptions()
     chrome_options.add_argument(f'--user-data-dir={profile_path}')
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-gpu')
+    #chrome_options.add_argument('--headless')
+    #chrome_options.add_argument('--disable-gpu')
     
     # Disable images, CSS, and other unnecessary resources to improve speed
     chrome_prefs = {
