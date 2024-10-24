@@ -58,12 +58,11 @@ def start_chrome_with_profile(profile_path, proxy):
 
                 # Monitor URL change to verify if the action was successful
                 if monitor_url_change(driver, initial_url):
-                    print("URL changed successfully. Action was successful.")
+                    #print("URL changed successfully. Action was successful.")
                     break
-                else:
-                    print("URL did not change. Retrying click in 3 seconds...")
+                #else:
+                    #print("URL did not change. Retrying click in 3 seconds...")
                     #time.sleep(3)
-
             except Exception as e:
                 print(f"An error occurred while trying to click the checkout button: {e}")
                 #time.sleep(3)
@@ -82,7 +81,7 @@ def start_chrome_with_profile(profile_path, proxy):
         print(f"Browser for profile '{profile_path}' closed.")
 
 # Function to monitor URL change after clicking the button
-def monitor_url_change(driver, initial_url, timeout=0.0001):
+def monitor_url_change(driver, initial_url, timeout=0.0000001):
     """
     Monitors the URL change to confirm if the action was successful.
     Returns True if the URL changes, otherwise False.
