@@ -57,9 +57,9 @@ def start_chrome_with_profile(profile_path, proxy):
                 print("Checkout button clicked.")
 
                 # Monitor URL change to verify if the action was successful
-                if monitor_url_change(driver, initial_url):
+                #if monitor_url_change(driver, initial_url):
                     #print("URL changed successfully. Action was successful.")
-                    break
+                    #break
                 #else:
                     #print("URL did not change. Retrying click in 3 seconds...")
                     #time.sleep(3)
