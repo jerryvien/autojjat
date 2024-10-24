@@ -182,6 +182,8 @@ def open_new_tab_and_close_current(driver, new_url):
     #driver.execute_script("window.open('');")  # Open a new blank tab
     #driver.switch_to.window(driver.window_handles[-1])  # Switch to the new tab
     driver.get(new_url)  # Navigate to the new URL
+    #chrome_options.add_argument('--headless')
+    #chrome_options.add_argument('--disable-gpu')
     print(f"Navigated to new tab with URL: {new_url}")
     #time.sleep(5)
     # Wait for the button to be present in the DOM and clickable (reduced wait time)
