@@ -1,16 +1,24 @@
-2024/10/25-02:22:46.925 5fac Reusing MANIFEST e:\autojjat\chrome_profiles\ALIBOT004\Default\Local Storage\leveldb/MANIFEST-000001
-2024/10/25-02:22:46.928 5fac Recovering log #13
-2024/10/25-02:22:46.929 5fac Level-0 table #16: started
-2024/10/25-02:22:46.934 5fac Level-0 table #16: 85782 bytes OK
-2024/10/25-02:22:46.936 5fac Delete type=0 #13
-2024/10/25-02:22:46.937 2e14 Compacting 4@0 + 1@1 files
-2024/10/25-02:22:46.947 2e14 Generated table #18@0: 71 keys, 347001 bytes
-2024/10/25-02:22:46.947 2e14 Compacted 4@0 + 1@1 files => 347001 bytes
-2024/10/25-02:22:46.948 2e14 compacted to: files[ 0 1 1 0 0 0 0 ]
-2024/10/25-02:22:46.949 2e14 Delete type=2 #7
-2024/10/25-02:22:46.949 2e14 Delete type=2 #9
-2024/10/25-02:22:46.949 2e14 Delete type=2 #12
-2024/10/25-02:22:46.949 2e14 Delete type=2 #14
-2024/10/25-02:22:46.949 2e14 Delete type=2 #16
-2024/10/25-02:23:40.993 8704 Level-0 table #20: started
-2024/10/25-02:23:41.000 8704 Level-0 table #20: 129728 bytes OK
+2024/10/25-02:24:47.480 6310 Reusing MANIFEST e:\autojjat\chrome_profiles\ALIBOT004\Default\Local Storage\leveldb/MANIFEST-000001
+2024/10/25-02:24:47.483 6310 Recovering log #17
+2024/10/25-02:24:47.484 6310 Level-0 table #20: started
+2024/10/25-02:24:47.489 6310 Level-0 table #20: 129728 bytes OK
+2024/10/25-02:24:47.490 6310 Recovering log #19
+2024/10/25-02:24:47.490 6310 Level-0 table #21: started
+2024/10/25-02:24:47.494 6310 Level-0 table #21: 89466 bytes OK
+2024/10/25-02:24:47.497 6310 Delete type=0 #17
+2024/10/25-02:24:47.497 6310 Delete type=0 #19
+2024/10/25-02:25:00.521 371c Level-0 table #24: started
+2024/10/25-02:25:00.525 371c Level-0 table #24: 88859 bytes OK
+2024/10/25-02:25:00.526 371c Delete type=0 #22
+2024/10/25-02:26:11.578 371c Level-0 table #26: started
+2024/10/25-02:26:11.583 371c Level-0 table #26: 102095 bytes OK
+2024/10/25-02:26:11.585 371c Delete type=0 #23
+2024/10/25-02:26:11.585 371c Compacting 4@0 + 1@1 files
+2024/10/25-02:26:11.594 371c Generated table #27@0: 96 keys, 355961 bytes
+2024/10/25-02:26:11.594 371c Compacted 4@0 + 1@1 files => 355961 bytes
+2024/10/25-02:26:11.595 371c compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/10/25-02:26:11.595 371c Delete type=2 #18
+2024/10/25-02:26:11.595 371c Delete type=2 #20
+2024/10/25-02:26:11.596 371c Delete type=2 #21
+2024/10/25-02:26:11.596 371c Delete type=2 #24
+2024/10/25-02:26:11.596 371c Delete type=2 #26
