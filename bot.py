@@ -5,10 +5,23 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import requests
 
 # IPRoyal Proxy Configuration (with whitelisting, so no authentication needed)
 proxy_host = 'geo.iproyal.com'
 proxy_port = '11248'  # Updated proxy port
+proxy_country_code = '_country-my'
+
+# Construct the full proxy address
+proxy = f'{proxy_country_code}@{proxy_host}:{proxy_port}'
+# URL to get the current public IP address
+url = 'https://ipv4.icanhazip.com'
+
+# Define the proxies dictionary for HTTP and HTTPS (no auth required due to whitelisting)
+proxies = {
+    'http': f'http://{proxy}',
+    'https': f'http://{proxy}'
+}
 
 # PopMart URLs
 checkout_url = "https://www.popmart.com/my/largeShoppingCart"
@@ -26,8 +39,29 @@ def get_new_proxy():
         "port": proxy_port
     }
 
+# Function to get public IP address
+def get_public_ip(proxies=None):
+    try:
+        response = requests.get(url, proxies=proxies)
+        response.raise_for_status()  # Raise an HTTPError for bad responses
+        return response.text.strip()
+    except requests.exceptions.RequestException as e:
+        return f"Error occurred: {e}"
+
+# Step 1: Verify Proxy Using requests
+def verify_proxy():
+    try:
+        # Make a request using the proxy to verify the IP address
+        response = requests.get(url, proxies=proxies)
+        response.raise_for_status()  # Raise an error for bad responses
+        print(f"Public IP Address through Proxy: {response.text.strip()}")
+    except requests.exceptions.RequestException as e:
+        print(f"Error occurred: {e}")
+        return False
+    return True
+
 # Function to start Chrome with the selected profile, optional proxy, and silent mode
-def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
+def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
     # Define Chrome options with user data directory
     chrome_options = uc.ChromeOptions()
     chrome_options.add_argument(f'--user-data-dir={profile_path}')
@@ -163,6 +197,15 @@ def open_new_tab_and_close_current(driver, new_url):
     #print("Closed the previous tab and kept the new tab open.")
 
 if __name__ == "__main__":
+     # Step 1: Show current IP without proxy
+    print("Fetching current IP without proxy...")
+    current_ip = get_public_ip()
+    print(f"Current IP: {current_ip}\n")
+
+    # Step 2: Show the IP after applying the proxy
+    print("Fetching IP using IPRoyal proxy...")
+    proxy_ip = get_public_ip(proxies=proxies)
+    print(f"Proxy IP: {proxy_ip}\n")
     # Ensure that the profile path is provided
     if len(sys.argv) < 2:
         print("Usage: python bot.py <profile_path> [use_proxy] [run_silent]")
