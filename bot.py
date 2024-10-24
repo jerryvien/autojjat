@@ -157,6 +157,9 @@ def open_new_tab_and_close_current(driver, new_url):
     # Click the button
     checkout_button.click()
     print("Payment button clicked.")
+    # Wait for 3 seconds
+    time.sleep(5)
+    
     #driver.close()  # Close the previous tab
     #driver.switch_to.window(driver.window_handles[0])  # Switch back to the remaining tab
     #print("Closed the previous tab and kept the new tab open.")
