@@ -50,16 +50,26 @@ def rotate_ip_and_browse(target_url, profile_directory, profile_name):
     user_profile_path = os.path.join(profile_directory, profile_name)
     os.makedirs(user_profile_path, exist_ok=True)
 
-    # Define Chrome options
+    # Define Chrome options with minimal traffic settings
     chrome_options = uc.ChromeOptions()
     chrome_options.add_argument(f'--user-data-dir={user_profile_path}')
     chrome_options.add_argument(f'--proxy-server=http://{proxy_host}:{proxy_port}')
+    
+    # Arguments to reduce browser traffic
+    chrome_options.add_argument("--disable-extensions")  # Disable extensions
+    chrome_options.add_argument("--disable-gpu")  # Disable GPU
+    chrome_options.add_argument("--disable-images")  # Disable images (handled in blink settings below)
+    chrome_options.add_argument("--disable-animations")  # Disable animations
+    chrome_options.add_argument("--blink-settings=imagesEnabled=false")  # Disable loading images
+    chrome_options.add_argument("--disable-blink-features=AutomationControlled")  # Disable automation flag detection
+    chrome_options.add_argument("--no-sandbox")  # Disable sandboxing
+    chrome_options.add_argument("--disable-setuid-sandbox")  # Disable setuid sandbox
 
     # Initialize undetected Chrome with the proxy settings
     driver = uc.Chrome(options=chrome_options)
 
     try:
-        # Step 4: Open the target URL (PopMart)
+        # Step 4: Open the target URL (PopMart Login Page)
         driver.get(target_url)
         print(f"Successfully opened URL: {target_url}")
 
@@ -89,7 +99,7 @@ def cleanup_chrome_profile(profile_path):
             print(f"Removed cache directory: {path}")
 
 if __name__ == "__main__":
-    target_url = "https://www.popmart.com/my"
+    target_url = "https://www.popmart.com/my/user/login"  # Updated URL for PopMart login
     profile_directory = os.path.join(os.getcwd(), "chrome_profiles")  # Directory to store Chrome profiles
 
     # Create and manage multiple profiles
