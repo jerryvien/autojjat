@@ -112,10 +112,9 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
                 
 
                 # Wait for the button to be present in the DOM and clickable (reduced wait time)
-                wait = WebDriverWait(driver, 0.1)  # Reduced wait time to ensure element is present
-                checkout_button = wait.until(
-                    EC.element_to_be_clickable((By.XPATH, checkout_button_xpath))
-                )
+                #wait = WebDriverWait(driver, 0.1)  # Reduced wait time to ensure element is present
+                checkout_button = EC.element_to_be_clickable((By.XPATH, checkout_button_xpath))
+            
                 #print("Checkout button is found and clickable.")
 
                 # Click the button
@@ -127,14 +126,13 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
                     print("URL changed successfully. Action was successful.")
                     # Wait for the button to be present in the DOM and clickable (reduced wait time)
                     #time.sleep(5)
-                    wait = WebDriverWait(driver, 0.1)  # Reduced wait time to ensure element is present
-                    payment_button = wait.until(
-                        EC.element_to_be_clickable((By.XPATH, payment_button_xpath))
-                        )
-                    print("Payment button is found and clickable.")
+                    #wait = WebDriverWait(driver, 0.1)  # Reduced wait time to ensure element is present
+                    payment_button = EC.element_to_be_clickable((By.XPATH, payment_button_xpath))
+
+                    #print("Payment button is found and clickable.")
                     # Click the button
                     payment_button.click()
-                    print("Payment button clicked.")
+                    #print("Payment button clicked.")
                     break
                 else:
                     print("URL did not change. Refreshing elements and retrying...")
