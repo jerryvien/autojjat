@@ -112,7 +112,7 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
                 refresh_element(driver, checkout_button_xpath)
 
                 # Wait for the button to be present in the DOM and clickable (reduced wait time)
-                wait = WebDriverWait(driver, 3)  # Reduced wait time to ensure element is present
+                wait = WebDriverWait(driver, 1)  # Reduced wait time to ensure element is present
                 checkout_button = wait.until(
                     EC.element_to_be_clickable((By.XPATH, checkout_button_xpath))
                 )
@@ -126,8 +126,8 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
                 if fast_monitor_url_change(driver, checkout_url, timeout=0.1, poll_frequency=0.1):
                     print("URL changed successfully. Action was successful.")
                     # Wait for the button to be present in the DOM and clickable (reduced wait time)
-                    time.sleep(5)
-                    wait = WebDriverWait(driver, 3)  # Reduced wait time to ensure element is present
+                    #time.sleep(5)
+                    wait = WebDriverWait(driver, 1)  # Reduced wait time to ensure element is present
                     payment_button = wait.until(
                         EC.element_to_be_clickable((By.XPATH, payment_button_xpath))
                         )
@@ -198,15 +198,7 @@ def open_new_tab_and_close_current(driver, new_url):
     #print("Closed the previous tab and kept the new tab open.")
 
 if __name__ == "__main__":
-     # Step 1: Show current IP without proxy
-    print("Fetching current IP without proxy...")
-    current_ip = get_public_ip()
-    print(f"Current IP: {current_ip}\n")
-
-    # Step 2: Show the IP after applying the proxy
-    print("Fetching IP using IPRoyal proxy...")
-    proxy_ip = get_public_ip(proxies=proxies)
-    print(f"Proxy IP: {proxy_ip}\n")
+    
     # Ensure that the profile path is provided
     if len(sys.argv) < 2:
         print("Usage: python bot.py <profile_path> [use_proxy] [run_silent]")

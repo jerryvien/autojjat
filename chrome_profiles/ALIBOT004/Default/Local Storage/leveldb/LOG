@@ -1,3 +1,10 @@
-2024/10/25-02:28:02.748 74f0 Reusing MANIFEST e:\autojjat\chrome_profiles\ALIBOT004\Default\Local Storage\leveldb/MANIFEST-000001
-2024/10/25-02:28:02.752 74f0 Recovering log #25
-2024/10/25-02:28:02.752 74f0 Reusing old log e:\autojjat\chrome_profiles\ALIBOT004\Default\Local Storage\leveldb/000025.log 
+2024/10/25-02:31:10.889 69a4 Reusing MANIFEST e:\autojjat\chrome_profiles\ALIBOT004\Default\Local Storage\leveldb/MANIFEST-000001
+2024/10/25-02:31:10.892 69a4 Recovering log #25
+2024/10/25-02:31:10.893 69a4 Level-0 table #29: started
+2024/10/25-02:31:10.899 69a4 Level-0 table #29: 137014 bytes OK
+2024/10/25-02:31:10.901 69a4 Delete type=0 #25
+2024/10/25-02:31:23.954 34a8 Level-0 table #32: started
+2024/10/25-02:31:23.958 34a8 Level-0 table #32: 88936 bytes OK
+2024/10/25-02:31:23.959 34a8 Delete type=0 #30
+2024/10/25-02:31:28.439 34a8 Level-0 table #34: started
+2024/10/25-02:31:28.451 34a8 Level-0 table #34: 87941 bytes OK
