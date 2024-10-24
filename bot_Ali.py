@@ -116,14 +116,11 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
                 checkout_button = wait.until(
                     EC.element_to_be_clickable((By.XPATH, checkout_button_xpath))
                 )
-                print("Checkout button is found and clickable.")
+                #print("Checkout button is found and clickable.")
 
                 # Click the button
                 checkout_button.click()
-                print("Checkout button clicked.")
-
-                 # Refresh the target elements using JavaScript
-                refresh_element(driver, checkout_button_xpath)
+                #print("Checkout button clicked.")
 
                 # Monitor URL change using a polling mechanism for faster detection
                 if fast_monitor_url_change(driver, checkout_url, timeout=0.1, poll_frequency=0.1):
@@ -141,6 +138,8 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
                     break
                 else:
                     print("URL did not change. Refreshing elements and retrying...")
+                     # Refresh the target elements using JavaScript
+                    refresh_element(driver, checkout_button_xpath)
 
             except Exception as e:
                 # Specific validation for "no such window" or "web view not found" errors
