@@ -37,23 +37,20 @@ def start_chrome_with_profile(profile_path, proxy):
         # Directly navigate to the checkout page
         driver.get(checkout_url)
         print(f"Navigated to checkout page for profile at '{profile_path}'.")
-
         # Wait for a few seconds to allow the page to fully load
-        time.sleep(3)
-
+        #time.sleep(3)
         # Get the initial URL before clicking the button
         initial_url = driver.current_url
 
         # Keep clicking the checkout button until the URL changes
-        while True:
-            try:
-                # Wait for the button to be present in the DOM and clickable
-                wait = WebDriverWait(driver, 30)  # Longer wait time to ensure element is present
-                checkout_button = wait.until(
+         # Wait for the button to be present in the DOM and clickable
+        wait = WebDriverWait(driver, 15)  # Longer wait time to ensure element is present
+        checkout_button = wait.until(
                     EC.element_to_be_clickable((By.XPATH, checkout_button_xpath))
                 )
-                print("Checkout button is found and clickable.")
-
+        print("Checkout button is found and clickable.")
+        while True:
+            try:
                 # Scroll to the button and click
                 #driver.execute_script("arguments[0].scrollIntoView(true);", checkout_button)
                 checkout_button.click()
@@ -65,11 +62,11 @@ def start_chrome_with_profile(profile_path, proxy):
                     break
                 else:
                     print("URL did not change. Retrying click in 3 seconds...")
-                    time.sleep(3)
+                    #time.sleep(3)
 
             except Exception as e:
                 print(f"An error occurred while trying to click the checkout button: {e}")
-                time.sleep(3)
+                #time.sleep(3)
 
         # Keep the browser open
         print(f"Browser for profile at '{profile_path}' will remain open. Close it manually when done.")
