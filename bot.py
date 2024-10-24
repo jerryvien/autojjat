@@ -61,10 +61,12 @@ def verify_proxy():
     return True
 
 # Function to start Chrome with the selected profile, optional proxy, and silent mode
-def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
+def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=False):
     # Define Chrome options with user data directory
     chrome_options = uc.ChromeOptions()
     chrome_options.add_argument(f'--user-data-dir={profile_path}')
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-gpu')
     
     # Disable images, CSS, and other unnecessary resources to improve speed
     chrome_prefs = {
@@ -74,15 +76,14 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
             "cookies": 1,
             "javascript": 1,
             "plugins": 1,
-            "popups": 2,
-            "geolocation": 2,
+            "popups": 1,
+            "geolocation": 1,
             "notifications": 2,
             "automatic_downloads": 2
         }
     }
     chrome_options.experimental_options["prefs"] = chrome_prefs
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-gpu')
+    
 
     # Apply proxy settings if use_proxy is True
     if use_proxy:
