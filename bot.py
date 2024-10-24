@@ -23,8 +23,8 @@ def get_new_proxy():
         "port": proxy_port
     }
 
-# Function to start Chrome with the selected profile and optional proxy
-def start_chrome_with_profile(profile_path, use_proxy=False):
+# Function to start Chrome with the selected profile, optional proxy, and silent mode
+def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
     # Define Chrome options with user data directory
     chrome_options = uc.ChromeOptions()
     chrome_options.add_argument(f'--user-data-dir={profile_path}')
@@ -51,6 +51,11 @@ def start_chrome_with_profile(profile_path, use_proxy=False):
         chrome_options.add_argument(f'--proxy-server=http://{proxy["host"]}:{proxy["port"]}')
         print(f"Proxy enabled: {proxy['host']}:{proxy['port']}")
 
+    # Run Chrome in headless (silent) mode if run_silent is True
+    if run_silent:
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--disable-gpu')
+
     # Initialize undetected Chrome with the selected profile and proxy settings
     driver = uc.Chrome(options=chrome_options)
 
@@ -66,14 +71,14 @@ def start_chrome_with_profile(profile_path, use_proxy=False):
         while True:
             try:
                 # Wait for the button to be present in the DOM and clickable (reduced wait time)
-                wait = WebDriverWait(driver, 5)  # Reduced wait time to ensure element is present
+                wait = WebDriverWait(driver, 3)  # Reduced wait time to ensure element is present
                 checkout_button = wait.until(
                     EC.element_to_be_clickable((By.XPATH, checkout_button_xpath))
                 )
                 print("Checkout button is found and clickable.")
 
                 # Scroll to the button and click
-                #driver.execute_script("arguments[0].scrollIntoView(true);", checkout_button)
+                driver.execute_script("arguments[0].scrollIntoView(true);", checkout_button)
                 checkout_button.click()
                 print("Checkout button clicked.")
 
@@ -85,7 +90,6 @@ def start_chrome_with_profile(profile_path, use_proxy=False):
                     print("URL did not change. Refreshing page and retrying...")
                     # Refresh the page using JavaScript for a faster refresh
                     driver.execute_script("location.reload(true);")
-                    #time.sleep(2)  # Wait for the page to refresh and start loading
 
             except Exception as e:
                 # Specific validation for "no such window" or "web view not found" errors
@@ -94,7 +98,6 @@ def start_chrome_with_profile(profile_path, use_proxy=False):
                     break
                 else:
                     print(f"An error occurred while trying to click the checkout button: {e}")
-                    time.sleep(1)
 
         # Keep the browser open
         print(f"Browser for profile at '{profile_path}' will remain open. Close it manually when done.")
@@ -110,7 +113,7 @@ def start_chrome_with_profile(profile_path, use_proxy=False):
         print(f"Browser for profile '{profile_path}' closed.")
 
 # Function to monitor URL change after clicking the button using polling for faster detection
-def fast_monitor_url_change(driver, initial_url, timeout=5, poll_frequency=0.1):
+def fast_monitor_url_change(driver, initial_url, timeout=0.1, poll_frequency=0.1):
     """
     Monitors the URL change to confirm if the action was successful.
     Returns True if the URL changes, otherwise False.
@@ -126,7 +129,7 @@ def fast_monitor_url_change(driver, initial_url, timeout=5, poll_frequency=0.1):
 if __name__ == "__main__":
     # Ensure that the profile path is provided
     if len(sys.argv) < 2:
-        print("Usage: python bot.py <profile_path> [use_proxy]")
+        print("Usage: python bot.py <profile_path> [use_proxy] [run_silent]")
         sys.exit(1)
 
     # Get the profile path from the arguments
@@ -135,5 +138,8 @@ if __name__ == "__main__":
     # Optional argument to use proxy
     use_proxy = len(sys.argv) > 2 and sys.argv[2].lower() == 'true'
 
-    # Start Chrome with the profile and the optional proxy
-    start_chrome_with_profile(profile_path, use_proxy)
+    # Optional argument to run Chrome in silent (headless) mode
+    run_silent = len(sys.argv) > 3 and sys.argv[3].lower() == 'true'
+
+    # Start Chrome with the profile, optional proxy, and silent mode
+    start_chrome_with_profile(profile_path, use_proxy, run_silent)
