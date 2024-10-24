@@ -24,22 +24,26 @@ def get_new_proxy():
     }
 
 # Function to start Chrome with the selected profile and proxy
-def start_chrome_with_profile(profile_path, proxy):
+def start_chrome_with_profile(profile_path, proxy, headless=True):
     # Define Chrome options with user data directory and proxy
     chrome_options = uc.ChromeOptions()
     chrome_options.add_argument(f'--user-data-dir={profile_path}')
     chrome_options.add_argument(f'--proxy-server=http://{proxy["host"]}:{proxy["port"]}')
-    chrome_options.add_argument("--headless")  # Run in headless mode
-    chrome_options.add_argument("--blink-settings=imagesEnabled=false")  # Disable images
+    
+    if headless:
+        chrome_options.add_argument('--headless')  # Enable headless mode for silent execution
+        chrome_options.add_argument('--disable-gpu')  # Disable GPU to reduce overhead
+        chrome_options.add_argument('--blink-settings=imagesEnabled=false')  # Disable images to reduce loading time
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
 
     # Initialize undetected Chrome with the selected profile and proxy settings
     driver = uc.Chrome(options=chrome_options)
+    # Directly navigate to the checkout page
+    driver.get(checkout_url)
 
     try:
-        # Directly navigate to the checkout page
-        driver.get(checkout_url)
         print(f"Navigated to checkout page for profile at '{profile_path}'.")
-
         # Get the initial URL before clicking the button
         initial_url = driver.current_url
 
@@ -57,22 +61,20 @@ def start_chrome_with_profile(profile_path, proxy):
                     break
                 else:
                     print("URL did not change. Retrying click in 3 seconds...")
-                    
+                    #time.sleep(3)
 
             except Exception as e:
                 print(f"An error occurred while trying to click the checkout button: {e}")
-                
+                #time.sleep(3)
 
-        # Keep the browser open
-        #print(f"Browser for profile at '{profile_path}' will remain open. Close it manually when done.")
-        while True:
-            pass
+        # Keep the browser open (remove the infinite loop since headless won't support manual closing)
+        print(f"Browser for profile at '{profile_path}' completed. Closing now.")
 
     except Exception as e:
         print(f"An error occurred for profile '{profile_path}': {e}")
 
     finally:
-        # Close the browser when the script is manually stopped
+        # Close the browser when the script completes or if manually stopped
         driver.quit()
         print(f"Browser for profile '{profile_path}' closed.")
 
