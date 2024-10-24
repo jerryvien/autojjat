@@ -28,7 +28,7 @@ def start_chrome_with_profile(profile_path, proxy):
     # Define Chrome options with user data directory and proxy
     chrome_options = uc.ChromeOptions()
     chrome_options.add_argument(f'--user-data-dir={profile_path}')
-    chrome_options.add_argument(f'--proxy-server=http://{proxy["host"]}:{proxy["port"]}')
+    #chrome_options.add_argument(f'--proxy-server=http://{proxy["host"]}:{proxy["port"]}')
 
     # Initialize undetected Chrome with the selected profile and proxy settings
     driver = uc.Chrome(options=chrome_options)
