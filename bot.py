@@ -81,8 +81,8 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
         }
     }
     chrome_options.experimental_options["prefs"] = chrome_prefs
-    #chrome_options.add_argument('--headless')
-    #chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-gpu')
 
     # Apply proxy settings if use_proxy is True
     if use_proxy:
@@ -182,7 +182,7 @@ def open_new_tab_and_close_current(driver, new_url):
     #driver.switch_to.window(driver.window_handles[-1])  # Switch to the new tab
     driver.get(new_url)  # Navigate to the new URL
     print(f"Navigated to new tab with URL: {new_url}")
-    time.sleep(5)
+    #time.sleep(5)
     # Wait for the button to be present in the DOM and clickable (reduced wait time)
     wait = WebDriverWait(driver, 1)  # Reduced wait time to ensure element is present
     checkout_button = wait.until(
