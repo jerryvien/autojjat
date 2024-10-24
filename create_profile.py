@@ -3,23 +3,23 @@ import requests
 import time
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import shutil
 
 # URL to get the current public IP address
 url = 'https://ipv4.icanhazip.com'
 
-# IP Royal Proxy Configuration
+# IPRoyal Proxy Configuration (with whitelisting or automatic credentials)
 proxy_host = 'geo.iproyal.com'
-proxy_port = '12321'
-proxy_username = 'iproyal4174'
-proxy_password = 'dfIjovni'
+proxy_port = '11248'  # Updated proxy port
+proxy_country_code = '_country-my'
 
-# Define the proxies dictionary for HTTP and HTTPS
+# Construct the full proxy address
+proxy = f'{proxy_country_code}@{proxy_host}:{proxy_port}'
+
+# Define the proxies dictionary for HTTP and HTTPS (using credentials if not whitelisted)
 proxies = {
-    'http': f'http://{proxy_username}:{proxy_password}@{proxy_host}:{proxy_port}',
-    'https': f'http://{proxy_username}:{proxy_password}@{proxy_host}:{proxy_port}'
+    'http': f'http://{proxy}',
+    'https': f'http://{proxy}'
 }
 
 # Function to get public IP address
@@ -39,11 +39,11 @@ def rotate_ip_and_browse(target_url, profile_directory, profile_name):
     print(f"Current IP: {current_ip}\n")
 
     # Step 2: Show the IP after applying the proxy
-    print("Fetching IP using IP Royal proxy...")
+    print("Fetching IP using IPRoyal proxy...")
     proxy_ip = get_public_ip(proxies=proxies)
     print(f"Proxy IP: {proxy_ip}\n")
 
-    # Step 3: Start an undetected browser with FoxyProxy extension
+    # Step 3: Start an undetected browser with proxy settings
     print(f"Starting undetected Chrome browser for profile '{profile_name}' with the new proxy...")
 
     # Configure Chrome options with user data directory
@@ -53,25 +53,13 @@ def rotate_ip_and_browse(target_url, profile_directory, profile_name):
     # Define Chrome options
     chrome_options = uc.ChromeOptions()
     chrome_options.add_argument(f'--user-data-dir={user_profile_path}')
-    chrome_options.add_argument('--load-extension=IPRoyal.crx')  # Load the FoxyProxy extension
+    chrome_options.add_argument(f'--proxy-server=http://{proxy_host}:{proxy_port}')
 
     # Initialize undetected Chrome with the proxy settings
     driver = uc.Chrome(options=chrome_options)
 
     try:
-        # Open FoxyProxy extension page to configure proxy settings
-        driver.get("chrome-extension://<FOXYPROXY_EXTENSION_ID>/popup.html")
-
-        # Wait for the FoxyProxy setup page to load and configure the proxy
-        time.sleep(5)  # Wait for the FoxyProxy extension to load completely
-        driver.find_element(By.ID, 'proxyHost').send_keys(proxy_host)
-        driver.find_element(By.ID, 'proxyPort').send_keys(proxy_port)
-        driver.find_element(By.ID, 'proxyUsername').send_keys(proxy_username)
-        driver.find_element(By.ID, 'proxyPassword').send_keys(proxy_password)
-        driver.find_element(By.ID, 'saveProxy').click()
-        time.sleep(2)  # Wait for the settings to be applied
-
-        # Verify IP Address with the configured FoxyProxy
+        # Verify IP Address with the configured proxy
         driver.get(url)
         time.sleep(2)
         public_ip = driver.find_element(By.TAG_NAME, "body").text.strip()
