@@ -99,7 +99,7 @@ def cleanup_chrome_profile(profile_path):
             print(f"Removed cache directory: {path}")
 
 if __name__ == "__main__":
-    target_url = "https://www.popmart.com/my/user/login"  # Updated URL for PopMart login
+    target_url = "https://www.aliexpress.com/"  # Updated URL for PopMart login
     profile_directory = os.path.join(os.getcwd(), "chrome_profiles")  # Directory to store Chrome profiles
 
     # Create and manage multiple profiles
@@ -108,7 +108,7 @@ if __name__ == "__main__":
     # Determine the next profile name based on existing profiles
     existing_profiles = [d for d in os.listdir(profile_directory) if os.path.isdir(os.path.join(profile_directory, d))]
     next_index = len(existing_profiles) + 1
-    profile_name = f"BOT{next_index:03d}"  # Creates BOT001, BOT002, etc.
+    profile_name = f"ALIBOT{next_index:03d}"  # Creates BOT001, BOT002, etc.
 
     # Rotate IP and open browser to visit the target URL with the newly created profile
     rotate_ip_and_browse(target_url, profile_directory, profile_name)

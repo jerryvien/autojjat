@@ -24,11 +24,12 @@ proxies = {
 }
 
 # PopMart URLs
-checkout_url = "https://www.popmart.com/my/largeShoppingCart"
+checkout_url = "https://www.aliexpress.com/item/1005007951632351.html?spm=a2g0o.store_pc_home.slider_2009828709109.0&gatewayAdapt=4itemAdapt&aff_fcid=897de1267f3c4a3996e7a4436f57fdd1-1729784126644-07007-_DE2PBXB&tt=CPS_NORMAL&aff_fsk=_DE2PBXB&aff_platform=portals-tool&sk=_DE2PBXB&aff_trace_key=897de1267f3c4a3996e7a4436f57fdd1-1729784126644-07007-_DE2PBXB&terminal_id=8f1f0d32009e489fa29dba27b45531c4&afSmartRedirect=y"
 confirmation_url = "https://www.popmart.com/my/order-confirmation?source=cart"
-checkbox_xpath = '//*[@id="__next"]/div/div/div[2]/div/div[2]/div[1]/div[1]/div[1]/div[1]'
-checkout_button_xpath = '//*[@id="__next"]/div/div/div[2]/div/div[2]/div[2]/div[3]/button'
-payment_button_xpath = '//*[@id="__next"]/div/div/div[2]/div[1]/div[1]/div/button'
+#buy now button ALi express
+checkout_button_xpath = '//*[@id="root"]/div/div[1]/div/div[2]/div/div/div[6]/button[1]'
+payment_button_xpath = '//*[@id="placeorder_wrap__inner"]/div/div[2]/div[2]/div/div/div[2]/button'
+
 
 # Function to get a new proxy (simulated for this script)
 def get_new_proxy():
@@ -107,17 +108,11 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
         while True:
             try:
                 # Refresh the target elements using JavaScript
-                refresh_element(driver, checkbox_xpath)
+                
                 refresh_element(driver, checkout_button_xpath)
 
-                # Ensure the checkbox element is properly checked before proceeding
-                checkbox = driver.find_element(By.XPATH, checkbox_xpath)
-                if not checkbox.is_selected():
-                    checkbox.click()
-                    print("Checkbox is now checked.")
-
                 # Wait for the button to be present in the DOM and clickable (reduced wait time)
-                wait = WebDriverWait(driver, 1)  # Reduced wait time to ensure element is present
+                wait = WebDriverWait(driver, 3)  # Reduced wait time to ensure element is present
                 checkout_button = wait.until(
                     EC.element_to_be_clickable((By.XPATH, checkout_button_xpath))
                 )
@@ -130,7 +125,15 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
                 # Monitor URL change using a polling mechanism for faster detection
                 if fast_monitor_url_change(driver, checkout_url, timeout=0.1, poll_frequency=0.1):
                     print("URL changed successfully. Action was successful.")
-
+                    # Wait for the button to be present in the DOM and clickable (reduced wait time)
+                    wait = WebDriverWait(driver, 3)  # Reduced wait time to ensure element is present
+                    payment_button = wait.until(
+                        EC.element_to_be_clickable((By.XPATH, payment_button_xpath))
+                        )
+                    print("Payment button is found and clickable.")
+                    # Click the button
+                    payment_button.click()
+                    print("Payment button clicked.")
                     break
                 else:
                     print("URL did not change. Refreshing elements and retrying...")
@@ -145,13 +148,10 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
 
     except Exception as e:
         print(f"An error occurred for profile '{profile_path}': {e}")
-
-
-
     finally:
         # Keep the browser open
         # After URL changes, open a new tab and close the current one
-        open_new_tab_and_close_current(driver, confirmation_url)
+        
         print(f"Browser for profile at '{profile_path}' will remain open. Close it manually when done.")
         while True:
             pass
@@ -184,7 +184,7 @@ def open_new_tab_and_close_current(driver, new_url):
     print(f"Navigated to new tab with URL: {new_url}")
     #time.sleep(5)
     # Wait for the button to be present in the DOM and clickable (reduced wait time)
-    wait = WebDriverWait(driver, 1)  # Reduced wait time to ensure element is present
+    wait = WebDriverWait(driver, 3)  # Reduced wait time to ensure element is present
     checkout_button = wait.until(
         EC.element_to_be_clickable((By.XPATH, payment_button_xpath))
         )
