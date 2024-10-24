@@ -61,7 +61,7 @@ def verify_proxy():
     return True
 
 # Function to start Chrome with the selected profile, optional proxy, and silent mode
-def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
+def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=False):
     # Define Chrome options with user data directory
     chrome_options = uc.ChromeOptions()
     chrome_options.add_argument(f'--user-data-dir={profile_path}')
