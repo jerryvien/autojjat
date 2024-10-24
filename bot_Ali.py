@@ -81,8 +81,8 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
         }
     }
     chrome_options.experimental_options["prefs"] = chrome_prefs
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-gpu')
+    #chrome_options.add_argument('--headless')
+    #chrome_options.add_argument('--disable-gpu')
 
     # Apply proxy settings if use_proxy is True
     if use_proxy:
