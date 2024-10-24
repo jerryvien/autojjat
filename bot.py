@@ -12,6 +12,7 @@ proxy_port = '11248'  # Updated proxy port
 
 # PopMart URLs
 checkout_url = "https://www.popmart.com/my/largeShoppingCart"
+checkbox_xpath = '//*[@id="__next"]/div/div/div[2]/div/div[2]/div[1]/div[1]/div[1]/div[1]'
 checkout_button_xpath = '//*[@id="__next"]/div/div/div[2]/div/div[2]/div[2]/div[3]/button'
 
 # Function to get a new proxy (simulated for this script)
@@ -24,7 +25,7 @@ def get_new_proxy():
     }
 
 # Function to start Chrome with the selected profile, optional proxy, and silent mode
-def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
+def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=False):
     # Define Chrome options with user data directory
     chrome_options = uc.ChromeOptions()
     chrome_options.add_argument(f'--user-data-dir={profile_path}')
@@ -44,8 +45,6 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
         }
     }
     chrome_options.experimental_options["prefs"] = chrome_prefs
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-gpu')
 
     # Apply proxy settings if use_proxy is True
     if use_proxy:
@@ -59,7 +58,6 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
         chrome_options.add_argument('--disable-gpu')
 
     # Initialize undetected Chrome with the selected profile and proxy settings
-
     driver = uc.Chrome(options=chrome_options)
 
     try:
@@ -67,30 +65,30 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
         driver.get(checkout_url)
         print(f"Navigated to checkout page for profile at '{profile_path}'.")
 
-        # Get the initial URL before clicking the button
-        initial_url = driver.current_url
-
         # Try to find and click the checkout button until the URL changes
         while True:
             try:
+                # Refresh the target elements using JavaScript
+                refresh_element(driver, checkbox_xpath)
+                refresh_element(driver, checkout_button_xpath)
+
                 # Wait for the button to be present in the DOM and clickable (reduced wait time)
-                wait = WebDriverWait(driver, 3)  # Reduced wait time to ensure element is present
+                wait = WebDriverWait(driver, 5)  # Reduced wait time to ensure element is present
                 checkout_button = wait.until(
                     EC.element_to_be_clickable((By.XPATH, checkout_button_xpath))
                 )
                 print("Checkout button is found and clickable.")
 
+                # Click the button
                 checkout_button.click()
                 print("Checkout button clicked.")
 
                 # Monitor URL change using a polling mechanism for faster detection
-                if fast_monitor_url_change(driver, initial_url, timeout=5, poll_frequency=0.1):
+                if fast_monitor_url_change(driver, checkout_url, timeout=5, poll_frequency=0.1):
                     print("URL changed successfully. Action was successful.")
                     break
                 else:
-                    print("URL did not change. Refreshing page and retrying...")
-                    # Refresh the page using JavaScript for a faster refresh
-                    driver.execute_script("location.reload(true);")
+                    print("URL did not change. Refreshing elements and retrying...")
 
             except Exception as e:
                 # Specific validation for "no such window" or "web view not found" errors
@@ -100,21 +98,23 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
                 else:
                     print(f"An error occurred while trying to click the checkout button: {e}")
 
+    except Exception as e:
+        print(f"An error occurred for profile '{profile_path}': {e}")
+
+    finally:
         # Keep the browser open
         print(f"Browser for profile at '{profile_path}' will remain open. Close it manually when done.")
         while True:
             pass
 
-    except Exception as e:
-        print(f"An error occurred for profile '{profile_path}': {e}")
-
-    finally:
-        # Close the browser when the script is manually stopped
-        driver.quit()
-        print(f"Browser for profile '{profile_path}' closed.")
+# Function to refresh specific elements on the page using JavaScript
+def refresh_element(driver, xpath):
+    element = driver.find_element(By.XPATH, xpath)
+    driver.execute_script("arguments[0].innerHTML = arguments[0].innerHTML;", element)
+    print(f"Element at '{xpath}' refreshed.")
 
 # Function to monitor URL change after clicking the button using polling for faster detection
-def fast_monitor_url_change(driver, initial_url, timeout=0.1, poll_frequency=0.1):
+def fast_monitor_url_change(driver, initial_url, timeout=5, poll_frequency=0.1):
     """
     Monitors the URL change to confirm if the action was successful.
     Returns True if the URL changes, otherwise False.
@@ -124,7 +124,7 @@ def fast_monitor_url_change(driver, initial_url, timeout=0.1, poll_frequency=0.1
     while time.time() - start_time < timeout:
         if driver.current_url != initial_url:
             return True
-        time.sleep(poll_frequency)
+        driver.implicitly_wait(poll_frequency)  # Implicit wait instead of time.sleep for responsiveness
     return False
 
 if __name__ == "__main__":
