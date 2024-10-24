@@ -148,8 +148,9 @@ def open_new_tab_and_close_current(driver, new_url):
     #driver.switch_to.window(driver.window_handles[-1])  # Switch to the new tab
     driver.get(new_url)  # Navigate to the new URL
     print(f"Navigated to new tab with URL: {new_url}")
+   
     # Wait for the button to be present in the DOM and clickable (reduced wait time)
-    wait = WebDriverWait(driver, 1)  # Reduced wait time to ensure element is present
+    wait = WebDriverWait(driver, 5)  # Reduced wait time to ensure element is present
     checkout_button = wait.until(
         EC.element_to_be_clickable((By.XPATH, payment_button_xpath))
         )
