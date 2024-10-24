@@ -37,14 +37,8 @@ def start_chrome_with_profile(profile_directory, profile_name, proxy):
         # Directly navigate to the checkout page
         driver.get(checkout_url)
         print(f"Navigated to checkout page for profile '{profile_name}'.")
-
-        # Wait for manual actions or further steps
-        input(f"Press Enter to close the browser for profile '{profile_name}'...")
-
-    finally:
-        # Close the browser
-        driver.quit()
-        print(f"Browser for profile '{profile_name}' closed.")
+    except Exception as e:
+        print(f"An error occurred for profile '{profile_name}': {e}")
 
 if __name__ == "__main__":
     # Define the profile directory path
