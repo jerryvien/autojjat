@@ -24,8 +24,8 @@ proxies = {
 }
 
 # PopMart URLs
-#checkout_url = "https://www.aliexpress.com/item/1005007951632351.html?spm=a2g0o.store_pc_home.slider_2009828709109.0&gatewayAdapt=4itemAdapt&aff_fcid=897de1267f3c4a3996e7a4436f57fdd1-1729784126644-07007-_DE2PBXB&tt=CPS_NORMAL&aff_fsk=_DE2PBXB&aff_platform=portals-tool&sk=_DE2PBXB&aff_trace_key=897de1267f3c4a3996e7a4436f57fdd1-1729784126644-07007-_DE2PBXB&terminal_id=8f1f0d32009e489fa29dba27b45531c4&afSmartRedirect=y"
-checkout_url = "https://www.aliexpress.com/item/1005005762305303.html?spm=a2g0o.order_list.order_list_main.5.21ef1802d4yHHT"
+checkout_url = "https://www.aliexpress.com/item/1005007951632351.html?spm=a2g0o.store_pc_home.slider_2009828709109.0&gatewayAdapt=4itemAdapt&aff_fcid=897de1267f3c4a3996e7a4436f57fdd1-1729784126644-07007-_DE2PBXB&tt=CPS_NORMAL&aff_fsk=_DE2PBXB&aff_platform=portals-tool&sk=_DE2PBXB&aff_trace_key=897de1267f3c4a3996e7a4436f57fdd1-1729784126644-07007-_DE2PBXB&terminal_id=8f1f0d32009e489fa29dba27b45531c4&afSmartRedirect=y"
+#checkout_url = "https://www.aliexpress.com/item/1005005762305303.html?spm=a2g0o.order_list.order_list_main.5.21ef1802d4yHHT"
 #buy now button ALi express
 checkout_button_xpath = '//*[@id="root"]/div/div[1]/div/div[2]/div/div/div[6]/button[1]'
 payment_button_xpath = '//*[@id="placeorder_wrap__inner"]/div/div[2]/div[2]/div/div/div[2]/button'
@@ -99,8 +99,7 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
     # Initialize undetected Chrome with the selected profile and proxy settings
     driver = uc.Chrome(options=chrome_options)
 
-     # Start the timer
-    start_time = datetime.datetime.now()
+    #start_time = datetime.datetime.now()
 
     try:
         # Directly navigate to the checkout page
@@ -110,10 +109,6 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
         # Try to find and click the checkout button until the URL changes
         while True:
             try:
-               
-                
-                
-
                 # Wait for the button to be present in the DOM and clickable (reduced wait time)
                 #wait = WebDriverWait(driver, 0.1)  # Reduced wait time to ensure element is present
                 checkout_button = driver.find_element(By.XPATH, checkout_button_xpath)
@@ -123,10 +118,14 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
                 # Click the button
                 checkout_button.click()
                 #print("Checkout button clicked.")
+                # Start the timer
+                start_time = 0
 
                 # Monitor URL change using a polling mechanism for faster detection
                 if fast_monitor_url_change(driver, checkout_url, timeout=0.1, poll_frequency=0.1):
                     print("URL changed successfully. Action was successful.")
+                    # Start the timer
+                    start_time = datetime.datetime.now()
                     # Wait for the button to be present in the DOM and clickable (reduced wait time)
                     #time.sleep(5)
                     #wait = WebDriverWait(driver, 0.1)  # Reduced wait time to ensure element is present
@@ -136,6 +135,7 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
                     # Click the button
                     payment_button.click()
                     #print("Payment button clicked.")
+
                     break
                 else:
                     print("URL did not change. Refreshing elements and retrying...")
