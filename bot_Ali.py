@@ -107,9 +107,9 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
         # Try to find and click the checkout button until the URL changes
         while True:
             try:
-                # Refresh the target elements using JavaScript
+               
                 
-                refresh_element(driver, checkout_button_xpath)
+                
 
                 # Wait for the button to be present in the DOM and clickable (reduced wait time)
                 wait = WebDriverWait(driver, 0.1)  # Reduced wait time to ensure element is present
@@ -121,6 +121,9 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
                 # Click the button
                 checkout_button.click()
                 print("Checkout button clicked.")
+
+                 # Refresh the target elements using JavaScript
+                refresh_element(driver, checkout_button_xpath)
 
                 # Monitor URL change using a polling mechanism for faster detection
                 if fast_monitor_url_change(driver, checkout_url, timeout=0.1, poll_frequency=0.1):
