@@ -37,7 +37,7 @@ def open_chrome_with_profile(profile_path, proxy_host, proxy_port, proxy_usernam
 
     try:
         # Open a specified URL for testing, e.g., PopMart's login page
-        driver.get("https://www.popmart.com/my/user/login")
+        driver.get("https://www.aliexpress.com/")
         print(f"Opened Chrome with profile at '{profile_path}'. You can now interact with the browser.")
 
         # Keep the browser open for manual interaction
