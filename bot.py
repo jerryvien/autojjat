@@ -44,7 +44,7 @@ def start_chrome_with_profile(profile_path, proxy):
 
         # Keep clicking the checkout button until the URL changes
          # Wait for the button to be present in the DOM and clickable
-        wait = WebDriverWait(driver, 15)  # Longer wait time to ensure element is present
+        wait = WebDriverWait(driver, 5)  # Longer wait time to ensure element is present
         checkout_button = wait.until(
                     EC.element_to_be_clickable((By.XPATH, checkout_button_xpath))
                 )
@@ -82,7 +82,7 @@ def start_chrome_with_profile(profile_path, proxy):
         print(f"Browser for profile '{profile_path}' closed.")
 
 # Function to monitor URL change after clicking the button
-def monitor_url_change(driver, initial_url, timeout=10):
+def monitor_url_change(driver, initial_url, timeout=0.01):
     """
     Monitors the URL change to confirm if the action was successful.
     Returns True if the URL changes, otherwise False.
