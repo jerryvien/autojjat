@@ -1,3 +1,14 @@
-2024/10/24-23:04:59.018 8814 Reusing MANIFEST e:\autojjat\chrome_profiles\BOT001\Default\Local Storage\leveldb/MANIFEST-000001
-2024/10/24-23:04:59.022 8814 Recovering log #21
-2024/10/24-23:04:59.023 8814 Reusing old log e:\autojjat\chrome_profiles\BOT001\Default\Local Storage\leveldb/000021.log 
+2024/10/24-23:06:15.213 81a4 Reusing MANIFEST e:\autojjat\chrome_profiles\BOT001\Default\Local Storage\leveldb/MANIFEST-000001
+2024/10/24-23:06:15.217 81a4 Recovering log #21
+2024/10/24-23:06:15.217 81a4 Level-0 table #23: started
+2024/10/24-23:06:15.222 81a4 Level-0 table #23: 47744 bytes OK
+2024/10/24-23:06:15.225 81a4 Delete type=0 #21
+2024/10/24-23:06:15.225 8108 Compacting 4@0 + 1@1 files
+2024/10/24-23:06:15.234 8108 Generated table #25@0: 44 keys, 45865 bytes
+2024/10/24-23:06:15.234 8108 Compacted 4@0 + 1@1 files => 45865 bytes
+2024/10/24-23:06:15.237 8108 compacted to: files[ 0 1 0 0 0 0 0 ]
+2024/10/24-23:06:15.239 8108 Delete type=2 #13
+2024/10/24-23:06:15.239 8108 Delete type=2 #15
+2024/10/24-23:06:15.239 8108 Delete type=2 #18
+2024/10/24-23:06:15.239 8108 Delete type=2 #20
+2024/10/24-23:06:15.239 8108 Delete type=2 #23

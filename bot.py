@@ -12,8 +12,10 @@ proxy_port = '11248'  # Updated proxy port
 
 # PopMart URLs
 checkout_url = "https://www.popmart.com/my/largeShoppingCart"
+confirmation_url = "https://www.popmart.com/my/order-confirmation?source=cart"
 checkbox_xpath = '//*[@id="__next"]/div/div/div[2]/div/div[2]/div[1]/div[1]/div[1]/div[1]'
 checkout_button_xpath = '//*[@id="__next"]/div/div/div[2]/div/div[2]/div[2]/div[3]/button'
+payment_button_xpath = '//*[@id="__next"]/div/div/div[2]/div[1]/div[1]/div/button'
 
 # Function to get a new proxy (simulated for this script)
 def get_new_proxy():
@@ -110,6 +112,9 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
     except Exception as e:
         print(f"An error occurred for profile '{profile_path}': {e}")
 
+        # After URL changes, open a new tab and close the current one
+        open_new_tab_and_close_current(driver, confirmation_url)
+
     finally:
         # Keep the browser open
         print(f"Browser for profile at '{profile_path}' will remain open. Close it manually when done.")
@@ -135,6 +140,25 @@ def fast_monitor_url_change(driver, initial_url, timeout=5, poll_frequency=0.1):
             return True
         driver.implicitly_wait(poll_frequency)  # Implicit wait instead of time.sleep for responsiveness
     return False
+
+# Function to open a new tab and close the current one, keeping the session
+def open_new_tab_and_close_current(driver, new_url):
+    #driver.execute_script("window.open('');")  # Open a new blank tab
+    #driver.switch_to.window(driver.window_handles[-1])  # Switch to the new tab
+    driver.get(new_url)  # Navigate to the new URL
+    print(f"Navigated to new tab with URL: {new_url}")
+    # Wait for the button to be present in the DOM and clickable (reduced wait time)
+    wait = WebDriverWait(driver, 1)  # Reduced wait time to ensure element is present
+    checkout_button = wait.until(
+        EC.element_to_be_clickable((By.XPATH, payment_button_xpath))
+        )
+    print("Payment button is found and clickable.")
+    # Click the button
+    checkout_button.click()
+    print("Payment button clicked.")
+    #driver.close()  # Close the previous tab
+    #driver.switch_to.window(driver.window_handles[0])  # Switch back to the remaining tab
+    #print("Closed the previous tab and kept the new tab open.")
 
 if __name__ == "__main__":
     # Ensure that the profile path is provided
