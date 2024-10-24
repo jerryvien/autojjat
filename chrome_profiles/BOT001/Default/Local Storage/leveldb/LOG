@@ -1,2 +1,5 @@
-2024/10/24-19:53:34.145 6ba4 Creating DB E:\autojjat\chrome_profiles\BOT001\Default\Local Storage\leveldb since it was missing.
-2024/10/24-19:53:34.163 6ba4 Reusing MANIFEST E:\autojjat\chrome_profiles\BOT001\Default\Local Storage\leveldb/MANIFEST-000001
+2024/10/24-20:07:43.127 1cc0 Reusing MANIFEST e:\autojjat\chrome_profiles\BOT001\Default\Local Storage\leveldb/MANIFEST-000001
+2024/10/24-20:07:43.130 1cc0 Recovering log #3
+2024/10/24-20:07:43.131 1cc0 Level-0 table #3: started
+2024/10/24-20:07:43.139 1cc0 Level-0 table #3: 45191 bytes OK
+2024/10/24-20:07:43.142 1cc0 Delete type=0 #3

@@ -19,10 +19,10 @@ def open_chrome_with_profile(profile_path, proxy_host, proxy_port, proxy_usernam
     chrome_options.add_argument(f'--user-data-dir={profile_path}')  # Use the specified profile directory
 
     # Set up proxy if provided
-    if proxy_username and proxy_password:
-        chrome_options.add_argument(f'--proxy-server=http://{proxy_username}:{proxy_password}@{proxy_host}:{proxy_port}')
-    else:
-        chrome_options.add_argument(f'--proxy-server=http://{proxy_host}:{proxy_port}')  # Whitelisted proxy
+    #if proxy_username and proxy_password:
+        #chrome_options.add_argument(f'--proxy-server=http://{proxy_username}:{proxy_password}@{proxy_host}:{proxy_port}')
+    #else:
+        #chrome_options.add_argument(f'--proxy-server=http://{proxy_host}:{proxy_port}')  # Whitelisted proxy
 
     # Enable headless mode if required
     if headless:
