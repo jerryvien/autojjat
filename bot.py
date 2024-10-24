@@ -112,11 +112,12 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
     except Exception as e:
         print(f"An error occurred for profile '{profile_path}': {e}")
 
-        # After URL changes, open a new tab and close the current one
-        open_new_tab_and_close_current(driver, confirmation_url)
+
 
     finally:
         # Keep the browser open
+        # After URL changes, open a new tab and close the current one
+        open_new_tab_and_close_current(driver, confirmation_url)
         print(f"Browser for profile at '{profile_path}' will remain open. Close it manually when done.")
         while True:
             pass
