@@ -1,3 +1,8 @@
-2024/10/24-20:07:00.318 703c Reusing MANIFEST e:\autojjat\chrome_profiles\BOT001\Default\Session Storage/MANIFEST-000001
-2024/10/24-20:07:00.319 703c Recovering log #3
-2024/10/24-20:07:00.320 703c Reusing old log e:\autojjat\chrome_profiles\BOT001\Default\Session Storage/000003.log 
+2024/10/24-20:11:56.201 58c0 Reusing MANIFEST e:\autojjat\chrome_profiles\BOT001\Default\Session Storage/MANIFEST-000001
+2024/10/24-20:11:56.202 58c0 Recovering log #3
+2024/10/24-20:11:56.202 58c0 Level-0 table #3: started
+2024/10/24-20:11:56.210 58c0 Level-0 table #3: 12256 bytes OK
+2024/10/24-20:11:56.211 58c0 Recovering log #4
+2024/10/24-20:11:56.212 58c0 Reusing old log e:\autojjat\chrome_profiles\BOT001\Default\Session Storage/000004.log 
+2024/10/24-20:11:56.214 58c0 Delete type=0 #3
+2024/10/24-20:11:56.215 58c0 Delete type=2 #5
