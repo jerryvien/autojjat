@@ -74,9 +74,11 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
 
                 # Ensure the checkbox element is properly checked before proceeding
                 checkbox = driver.find_element(By.XPATH, checkbox_xpath)
-                if not checkbox.is_selected():
+                while not checkbox.is_selected():
                     checkbox.click()
-                    print("Checkbox is now checked.")
+                    print("Attempting to check the checkbox...")
+                    WebDriverWait(driver, 2).until(lambda d: checkbox.is_selected())
+                print("Checkbox is now properly checked.")
 
                 # Wait for the button to be present in the DOM and clickable (reduced wait time)
                 wait = WebDriverWait(driver, 1)  # Reduced wait time to ensure element is present
