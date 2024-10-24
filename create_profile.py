@@ -59,23 +59,14 @@ def rotate_ip_and_browse(target_url, profile_directory, profile_name):
     driver = uc.Chrome(options=chrome_options)
 
     try:
-        # Verify IP Address with the configured proxy
-        driver.get(url)
-        time.sleep(2)
-        public_ip = driver.find_element(By.TAG_NAME, "body").text.strip()
-        print(f"IP address after proxy in browser: {public_ip}\n")
-
-        # Step 4: Open the target URL (PopMart) and What's My IP page
+        # Step 4: Open the target URL (PopMart)
         driver.get(target_url)
         print(f"Successfully opened URL: {target_url}")
 
-        # Open What's My IP page to verify the proxy is being used
-        driver.execute_script("window.open('https://whatismyipaddress.com/', '_blank');")
-        driver.switch_to.window(driver.window_handles[1])
-        print("Opened What's My IP page.")
+        # Wait for input in terminal to proceed
+        input("Press Enter to perform further actions...")
 
-        # Wait for a few seconds to simulate browsing
-        input("Press Enter to close the browser and save the profile...")
+        # Perform further actions after confirmation
 
     finally:
         # Close the browser
