@@ -25,7 +25,7 @@ def get_new_proxy():
     }
 
 # Function to start Chrome with the selected profile, optional proxy, and silent mode
-def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=False):
+def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
     # Define Chrome options with user data directory
     chrome_options = uc.ChromeOptions()
     chrome_options.add_argument(f'--user-data-dir={profile_path}')
@@ -71,6 +71,12 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=False):
                 # Refresh the target elements using JavaScript
                 refresh_element(driver, checkbox_xpath)
                 refresh_element(driver, checkout_button_xpath)
+
+                # Ensure the checkbox element is properly checked before proceeding
+                checkbox = driver.find_element(By.XPATH, checkbox_xpath)
+                if not checkbox.is_selected():
+                    checkbox.click()
+                    print("Checkbox is now checked.")
 
                 # Wait for the button to be present in the DOM and clickable (reduced wait time)
                 wait = WebDriverWait(driver, 1)  # Reduced wait time to ensure element is present
