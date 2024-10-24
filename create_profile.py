@@ -16,13 +16,10 @@ proxy_port = '12321'
 proxy_username = 'iproyal4174'
 proxy_password = 'dfIjovni'
 
-# Construct the proxy URL with authentication
-proxy = f'{proxy_username}:{proxy_password}@{proxy_host}:{proxy_port}'
-
 # Define the proxies dictionary for HTTP and HTTPS
 proxies = {
-    'http': f'http://{proxy}',
-    'https': f'http://{proxy}'
+    'http': f'http://{proxy_username}:{proxy_password}@{proxy_host}:{proxy_port}',
+    'https': f'http://{proxy_username}:{proxy_password}@{proxy_host}:{proxy_port}'
 }
 
 # Function to get public IP address
@@ -46,57 +43,41 @@ def rotate_ip_and_browse(target_url, profile_directory, profile_name):
     proxy_ip = get_public_ip(proxies=proxies)
     print(f"Proxy IP: {proxy_ip}\n")
 
-    # Step 3: Start an undetected browser in headless mode to authenticate proxy
-    print(f"Starting undetected Chrome browser for profile '{profile_name}' in headless mode with the new proxy...")
+    # Step 3: Start an undetected browser with FoxyProxy extension
+    print(f"Starting undetected Chrome browser for profile '{profile_name}' with the new proxy...")
 
-    # Configure Chrome options with the proxy and user data directory
+    # Configure Chrome options with user data directory
     user_profile_path = os.path.join(profile_directory, profile_name)
     os.makedirs(user_profile_path, exist_ok=True)
 
+    # Define Chrome options
     chrome_options = uc.ChromeOptions()
     chrome_options.add_argument(f'--user-data-dir={user_profile_path}')
-    chrome_options.add_argument(f'--proxy-server=http://{proxy_host}:{proxy_port}')
-    chrome_options.add_argument('--headless')  # Run in headless mode to authenticate silently
+    chrome_options.add_argument('--load-extension=IPRoyal.crx')  # Load the FoxyProxy extension
 
     # Initialize undetected Chrome with the proxy settings
     driver = uc.Chrome(options=chrome_options)
 
     try:
-        # Automate the login to authenticate the proxy
-        driver.get("http://google.com")
-        try:
-            # Wait for the basic auth dialog to appear and enter credentials
-            WebDriverWait(driver, 10).until(EC.alert_is_present())
-            alert = driver.switch_to.alert
-            alert.send_keys(f"{proxy_username}\t{proxy_password}")
-            alert.accept()
-            print("Proxy authentication successful.")
-        except:
-            print("No authentication alert detected, proceeding with browsing.")
+        # Open FoxyProxy extension page to configure proxy settings
+        driver.get("chrome-extension://<FOXYPROXY_EXTENSION_ID>/popup.html")
 
-        # Verify IP Address in headless mode
+        # Wait for the FoxyProxy setup page to load and configure the proxy
+        time.sleep(5)  # Wait for the FoxyProxy extension to load completely
+        driver.find_element(By.ID, 'proxyHost').send_keys(proxy_host)
+        driver.find_element(By.ID, 'proxyPort').send_keys(proxy_port)
+        driver.find_element(By.ID, 'proxyUsername').send_keys(proxy_username)
+        driver.find_element(By.ID, 'proxyPassword').send_keys(proxy_password)
+        driver.find_element(By.ID, 'saveProxy').click()
+        time.sleep(2)  # Wait for the settings to be applied
+
+        # Verify IP Address with the configured FoxyProxy
         driver.get(url)
         time.sleep(2)
         public_ip = driver.find_element(By.TAG_NAME, "body").text.strip()
-        print(f"IP address after proxy in headless browser: {public_ip}\n")
+        print(f"IP address after proxy in browser: {public_ip}\n")
 
-    finally:
-        # Close the headless browser after verification
-        driver.quit()
-        print("Headless browser closed.")
-
-    # Step 4: Open a visible browser window after proxy verification
-    print(f"Starting Chrome browser for profile '{profile_name}' in normal mode...")
-
-    chrome_options = uc.ChromeOptions()
-    chrome_options.add_argument(f'--user-data-dir={user_profile_path}')
-    chrome_options.add_argument(f'--proxy-server=http://{proxy_host}:{proxy_port}')
-
-    # Initialize undetected Chrome with the proxy settings in normal mode
-    driver = uc.Chrome(options=chrome_options)
-
-    try:
-        # Open the target URL (PopMart) and What's My IP page
+        # Step 4: Open the target URL (PopMart) and What's My IP page
         driver.get(target_url)
         print(f"Successfully opened URL: {target_url}")
 
