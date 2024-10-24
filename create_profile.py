@@ -40,8 +40,8 @@ def rotate_ip_and_browse(target_url, profile_directory, profile_name):
 
     # Step 2: Show the IP after applying the proxy
     print("Fetching IP using IPRoyal proxy...")
-    proxy_ip = get_public_ip(proxies=proxies)
-    print(f"Proxy IP: {proxy_ip}\n")
+    #proxy_ip = get_public_ip(proxies=proxies)
+    #print(f"Proxy IP: {proxy_ip}\n")
 
     # Step 3: Start an undetected browser with proxy settings
     print(f"Starting undetected Chrome browser for profile '{profile_name}' with the new proxy...")
@@ -53,7 +53,7 @@ def rotate_ip_and_browse(target_url, profile_directory, profile_name):
     # Define Chrome options with minimal traffic settings
     chrome_options = uc.ChromeOptions()
     chrome_options.add_argument(f'--user-data-dir={user_profile_path}')
-    chrome_options.add_argument(f'--proxy-server=http://{proxy_host}:{proxy_port}')
+    #chrome_options.add_argument(f'--proxy-server=http://{proxy_host}:{proxy_port}')
     
     # Arguments to reduce browser traffic
     #chrome_options.add_argument("--disable-extensions")  # Disable extensions
