@@ -33,8 +33,8 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
     # Disable images, CSS, and other unnecessary resources to improve speed
     chrome_prefs = {
         "profile.default_content_setting_values": {
-            "images": 2,  # Disable images
-            "stylesheet": 2,  # Disable stylesheets
+            "images": 1,  # Disable images
+            "stylesheet": 1,  # Disable stylesheets
             "cookies": 1,
             "javascript": 1,
             "plugins": 1,
@@ -45,6 +45,8 @@ def start_chrome_with_profile(profile_path, use_proxy=False, run_silent=True):
         }
     }
     chrome_options.experimental_options["prefs"] = chrome_prefs
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-gpu')
 
     # Apply proxy settings if use_proxy is True
     if use_proxy:
