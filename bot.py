@@ -82,7 +82,7 @@ def start_chrome_with_profile(profile_path, proxy):
         print(f"Browser for profile '{profile_path}' closed.")
 
 # Function to monitor URL change after clicking the button
-def monitor_url_change(driver, initial_url, timeout=0.01):
+def monitor_url_change(driver, initial_url, timeout=0.0001):
     """
     Monitors the URL change to confirm if the action was successful.
     Returns True if the URL changes, otherwise False.
