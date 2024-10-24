@@ -4,7 +4,7 @@ import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
+import time,datetime
 import requests
 
 # IPRoyal Proxy Configuration (with whitelisting, so no authentication needed)
@@ -24,8 +24,8 @@ proxies = {
 }
 
 # PopMart URLs
-checkout_url = "https://www.aliexpress.com/item/1005007951632351.html?spm=a2g0o.store_pc_home.slider_2009828709109.0&gatewayAdapt=4itemAdapt&aff_fcid=897de1267f3c4a3996e7a4436f57fdd1-1729784126644-07007-_DE2PBXB&tt=CPS_NORMAL&aff_fsk=_DE2PBXB&aff_platform=portals-tool&sk=_DE2PBXB&aff_trace_key=897de1267f3c4a3996e7a4436f57fdd1-1729784126644-07007-_DE2PBXB&terminal_id=8f1f0d32009e489fa29dba27b45531c4&afSmartRedirect=y"
-#checkout_url = "https://www.aliexpress.com/item/1005005762305303.html?spm=a2g0o.order_list.order_list_main.5.21ef1802d4yHHT"
+#checkout_url = "https://www.aliexpress.com/item/1005007951632351.html?spm=a2g0o.store_pc_home.slider_2009828709109.0&gatewayAdapt=4itemAdapt&aff_fcid=897de1267f3c4a3996e7a4436f57fdd1-1729784126644-07007-_DE2PBXB&tt=CPS_NORMAL&aff_fsk=_DE2PBXB&aff_platform=portals-tool&sk=_DE2PBXB&aff_trace_key=897de1267f3c4a3996e7a4436f57fdd1-1729784126644-07007-_DE2PBXB&terminal_id=8f1f0d32009e489fa29dba27b45531c4&afSmartRedirect=y"
+checkout_url = "https://www.aliexpress.com/item/1005005762305303.html?spm=a2g0o.order_list.order_list_main.5.21ef1802d4yHHT"
 #buy now button ALi express
 checkout_button_xpath = '//*[@id="root"]/div/div[1]/div/div[2]/div/div/div[6]/button[1]'
 payment_button_xpath = '//*[@id="placeorder_wrap__inner"]/div/div[2]/div[2]/div/div/div[2]/button'
@@ -99,6 +99,9 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
     # Initialize undetected Chrome with the selected profile and proxy settings
     driver = uc.Chrome(options=chrome_options)
 
+     # Start the timer
+    start_time = datetime.datetime.now()
+
     try:
         # Directly navigate to the checkout page
         driver.get(checkout_url)
@@ -152,6 +155,10 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
     finally:
         # Keep the browser open
         # After URL changes, open a new tab and close the current one
+        # End the timer and calculate the elapsed time
+        end_time = datetime.datetime.now()
+        elapsed_time = (end_time - start_time).total_seconds()
+        print(f"Total time taken from first click to program finish: {elapsed_time} seconds")
         
         print(f"Browser for profile at '{profile_path}' will remain open. Close it manually when done.")
         while True:

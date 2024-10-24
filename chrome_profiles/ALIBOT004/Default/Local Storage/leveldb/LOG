@@ -1,5 +1,20 @@
-2024/10/25-02:57:02.227 3920 Reusing MANIFEST e:\autojjat\chrome_profiles\ALIBOT004\Default\Local Storage\leveldb/MANIFEST-000001
-2024/10/25-02:57:02.231 3920 Recovering log #61
-2024/10/25-02:57:02.232 3920 Reusing old log e:\autojjat\chrome_profiles\ALIBOT004\Default\Local Storage\leveldb/000061.log 
-2024/10/25-02:57:09.479 4004 Level-0 table #65: started
-2024/10/25-02:57:09.492 4004 Level-0 table #65: 93302 bytes OK
+2024/10/25-02:57:33.517 2240 Reusing MANIFEST e:\autojjat\chrome_profiles\ALIBOT004\Default\Local Storage\leveldb/MANIFEST-000001
+2024/10/25-02:57:33.521 2240 Recovering log #61
+2024/10/25-02:57:33.522 2240 Level-0 table #64: started
+2024/10/25-02:57:33.527 2240 Level-0 table #64: 93302 bytes OK
+2024/10/25-02:57:33.527 2240 Recovering log #64
+2024/10/25-02:57:33.528 2240 Reusing old log e:\autojjat\chrome_profiles\ALIBOT004\Default\Local Storage\leveldb/000064.log 
+2024/10/25-02:57:33.529 2240 Delete type=0 #61
+2024/10/25-02:57:33.530 2240 Delete type=2 #65
+2024/10/25-02:57:58.500 5440 Level-0 table #66: started
+2024/10/25-02:57:58.505 5440 Level-0 table #66: 131910 bytes OK
+2024/10/25-02:57:58.507 5440 Delete type=0 #64
+2024/10/25-02:57:58.507 5440 Compacting 4@0 + 1@1 files
+2024/10/25-02:57:58.518 5440 Generated table #67@0: 97 keys, 397412 bytes
+2024/10/25-02:57:58.518 5440 Compacted 4@0 + 1@1 files => 397412 bytes
+2024/10/25-02:57:58.519 5440 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/10/25-02:57:58.519 5440 Delete type=2 #57
+2024/10/25-02:57:58.519 5440 Delete type=2 #59
+2024/10/25-02:57:58.519 5440 Delete type=2 #62
+2024/10/25-02:57:58.519 5440 Delete type=2 #64
+2024/10/25-02:57:58.520 5440 Delete type=2 #66
