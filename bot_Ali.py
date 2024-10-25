@@ -24,9 +24,10 @@ proxies = {
 }
 
 # PopMart URLs
-checkout_url = "https://www.aliexpress.com/item/1005007951632351.html?spm=a2g0o.store_pc_home.slider_2009828709109.0&gatewayAdapt=4itemAdapt&aff_fcid=897de1267f3c4a3996e7a4436f57fdd1-1729784126644-07007-_DE2PBXB&tt=CPS_NORMAL&aff_fsk=_DE2PBXB&aff_platform=portals-tool&sk=_DE2PBXB&aff_trace_key=897de1267f3c4a3996e7a4436f57fdd1-1729784126644-07007-_DE2PBXB&terminal_id=8f1f0d32009e489fa29dba27b45531c4&afSmartRedirect=y"
-#checkout_url = "https://www.aliexpress.com/item/1005005762305303.html?spm=a2g0o.order_list.order_list_main.5.21ef1802d4yHHT"
+#checkout_url = "https://www.aliexpress.com/item/1005007951632351.html?spm=a2g0o.store_pc_home.slider_2009828709109.0&gatewayAdapt=4itemAdapt&aff_fcid=897de1267f3c4a3996e7a4436f57fdd1-1729784126644-07007-_DE2PBXB&tt=CPS_NORMAL&aff_fsk=_DE2PBXB&aff_platform=portals-tool&sk=_DE2PBXB&aff_trace_key=897de1267f3c4a3996e7a4436f57fdd1-1729784126644-07007-_DE2PBXB&terminal_id=8f1f0d32009e489fa29dba27b45531c4&afSmartRedirect=y"
+checkout_url = "https://www.aliexpress.com/item/1005005762305303.html?spm=a2g0o.order_list.order_list_main.5.21ef1802d4yHHT"
 #buy now button ALi express
+checkout_div_xpath = '//*[@id="root"]/div/div[1]/div/div[2]/div'
 checkout_button_xpath = '//*[@id="root"]/div/div[1]/div/div[2]/div/div/div[6]/button[1]'
 payment_button_xpath = '//*[@id="placeorder_wrap__inner"]/div/div[2]/div[2]/div/div/div[2]/button'
 
@@ -108,15 +109,17 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
 
         # Try to find and click the checkout button until the URL changes
         while True:
+            #refresh_element(driver, checkout_div_xpath)
+            #print("Div Refreshed")
+            driver.refresh()
             try:
                 # Wait for the button to be present in the DOM and clickable (reduced wait time)
                 #wait = WebDriverWait(driver, 0.1)  # Reduced wait time to ensure element is present
-                checkout_button = driver.find_element(By.XPATH, checkout_button_xpath)
-            
-                #print("Checkout button is found and clickable.")
-
+                checkout_button = WebDriverWait(driver, 1).until(EC.element_to_be_clickable((By.XPATH, checkout_button_xpath)))
+                print("Checkout button is found and clickable.")
                 # Click the button
                 checkout_button.click()
+                
                 #print("Checkout button clicked.")
                 # Start the timer
                 start_time = 0
@@ -140,7 +143,7 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
                 else:
                     print("URL did not change. Refreshing elements and retrying...")
                      # Refresh the target elements using JavaScript
-                    refresh_element(driver, checkout_button_xpath)
+                    refresh_element(driver, checkout_div_xpath)
 
             except Exception as e:
                 # Specific validation for "no such window" or "web view not found" errors
@@ -166,9 +169,20 @@ def start_chrome_with_profile(profile_path, use_proxy=True, run_silent=True):
 
 # Function to refresh specific elements on the page using JavaScript
 def refresh_element(driver, xpath):
-    element = driver.find_element(By.XPATH, xpath)
-    driver.execute_script("arguments[0].innerHTML = arguments[0].innerHTML;", element)
-    print(f"Element at '{xpath}' refreshed.")
+    try:
+        # Locate the element using XPath
+        element = driver.find_element(By.XPATH, xpath)
+        
+        # Use JavaScript to refresh the content
+        # This fetches the updated HTML content if it's loaded dynamically by the page's JS
+        driver.execute_script(
+            "var elem = arguments[0]; "
+            "elem.innerHTML = ''; "
+            "setTimeout(function() { elem.innerHTML = elem.innerHTML; }, 5000);", element
+        )
+        print(f"Element at '{xpath}' refreshed.")
+    except Exception as e:
+        print(f"Error refreshing element: {e}")
 
 # Function to monitor URL change after clicking the button using polling for faster detection
 def fast_monitor_url_change(driver, initial_url, timeout=5, poll_frequency=0.1):
