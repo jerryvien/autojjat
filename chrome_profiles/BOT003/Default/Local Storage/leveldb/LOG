@@ -1,3 +1,45 @@
-2024/10/25-08:58:20.676 16b4 Reusing MANIFEST e:\autojjat\chrome_profiles\BOT003\Default\Local Storage\leveldb/MANIFEST-000001
-2024/10/25-08:58:20.679 16b4 Recovering log #23
-2024/10/25-08:58:20.680 16b4 Reusing old log e:\autojjat\chrome_profiles\BOT003\Default\Local Storage\leveldb/000023.log 
+2024/10/25-09:49:05.885 1418 Reusing MANIFEST e:\autojjat\chrome_profiles\BOT003\Default\Local Storage\leveldb/MANIFEST-000001
+2024/10/25-09:49:05.889 1418 Recovering log #23
+2024/10/25-09:49:05.889 1418 Reusing old log e:\autojjat\chrome_profiles\BOT003\Default\Local Storage\leveldb/000023.log 
+2024/10/25-09:50:06.314 988 Level-0 table #26: started
+2024/10/25-09:50:06.317 988 Level-0 table #26: 47043 bytes OK
+2024/10/25-09:50:06.319 988 Delete type=0 #23
+2024/10/25-09:50:06.319 988 Compacting 4@0 + 1@1 files
+2024/10/25-09:50:06.322 988 Generated table #27@0: 45 keys, 47154 bytes
+2024/10/25-09:50:06.322 988 Compacted 4@0 + 1@1 files => 47154 bytes
+2024/10/25-09:50:06.323 988 compacted to: files[ 0 1 0 0 0 0 0 ]
+2024/10/25-09:50:06.324 988 Delete type=2 #14
+2024/10/25-09:50:06.324 988 Delete type=2 #16
+2024/10/25-09:50:06.324 988 Delete type=2 #19
+2024/10/25-09:50:06.324 988 Delete type=2 #22
+2024/10/25-09:50:06.324 988 Delete type=2 #26
+2024/10/25-10:05:06.311 988 Level-0 table #29: started
+2024/10/25-10:05:06.314 988 Level-0 table #29: 50763 bytes OK
+2024/10/25-10:05:06.315 988 Delete type=0 #25
+2024/10/25-10:10:06.312 988 Level-0 table #31: started
+2024/10/25-10:10:06.316 988 Level-0 table #31: 10283 bytes OK
+2024/10/25-10:10:06.318 988 Delete type=0 #28
+2024/10/25-10:14:06.314 988 Level-0 table #33: started
+2024/10/25-10:14:06.315 988 Level-0 table #33: 9513 bytes OK
+2024/10/25-10:14:06.317 988 Delete type=0 #30
+2024/10/25-10:17:06.319 988 Level-0 table #35: started
+2024/10/25-10:17:06.321 988 Level-0 table #35: 8072 bytes OK
+2024/10/25-10:17:06.323 988 Delete type=0 #32
+2024/10/25-10:17:06.323 988 Compacting 4@0 + 1@1 files
+2024/10/25-10:17:06.326 988 Generated table #36@0: 45 keys, 48946 bytes
+2024/10/25-10:17:06.326 988 Compacted 4@0 + 1@1 files => 48946 bytes
+2024/10/25-10:17:06.327 988 compacted to: files[ 0 1 0 0 0 0 0 ]
+2024/10/25-10:17:06.328 988 Delete type=2 #27
+2024/10/25-10:17:06.328 988 Delete type=2 #29
+2024/10/25-10:17:06.328 988 Delete type=2 #31
+2024/10/25-10:17:06.328 988 Delete type=2 #33
+2024/10/25-10:17:06.328 988 Delete type=2 #35
+2024/10/25-10:20:06.322 988 Level-0 table #38: started
+2024/10/25-10:20:06.325 988 Level-0 table #38: 8776 bytes OK
+2024/10/25-10:20:06.326 988 Delete type=0 #34
+2024/10/25-10:23:06.320 988 Level-0 table #40: started
+2024/10/25-10:23:06.323 988 Level-0 table #40: 9481 bytes OK
+2024/10/25-10:23:06.324 988 Delete type=0 #37
+2024/10/25-10:26:06.326 988 Level-0 table #42: started
+2024/10/25-10:26:06.329 988 Level-0 table #42: 10170 bytes OK
+2024/10/25-10:26:06.330 988 Delete type=0 #39

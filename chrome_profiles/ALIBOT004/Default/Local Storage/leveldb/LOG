@@ -1,7 +1,63 @@
-2024/10/25-09:16:29.984 1254 Reusing MANIFEST e:\autojjat\chrome_profiles\ALIBOT004\Default\Local Storage\leveldb/MANIFEST-000001
-2024/10/25-09:16:29.988 1254 Recovering log #102
-2024/10/25-09:16:29.988 1254 Level-0 table #105: started
-2024/10/25-09:16:29.994 1254 Level-0 table #105: 98926 bytes OK
-2024/10/25-09:16:29.996 1254 Delete type=0 #102
-2024/10/25-09:16:40.123 73f4 Level-0 table #108: started
-2024/10/25-09:16:40.135 73f4 Level-0 table #108: 130612 bytes OK
+2024/10/25-09:17:26.558 328 Reusing MANIFEST e:\autojjat\chrome_profiles\ALIBOT004\Default\Local Storage\leveldb/MANIFEST-000001
+2024/10/25-09:17:26.562 328 Recovering log #106
+2024/10/25-09:17:26.563 328 Level-0 table #108: started
+2024/10/25-09:17:26.569 328 Level-0 table #108: 130612 bytes OK
+2024/10/25-09:17:26.569 328 Recovering log #107
+2024/10/25-09:17:26.570 328 Level-0 table #109: started
+2024/10/25-09:17:26.574 328 Level-0 table #109: 89468 bytes OK
+2024/10/25-09:17:26.576 328 Delete type=0 #106
+2024/10/25-09:17:26.577 328 Delete type=0 #107
+2024/10/25-09:18:27.179 69f4 Level-0 table #112: started
+2024/10/25-09:18:27.183 69f4 Level-0 table #112: 130622 bytes OK
+2024/10/25-09:18:27.185 69f4 Delete type=0 #110
+2024/10/25-09:18:27.185 69f4 Compacting 4@0 + 1@1 files
+2024/10/25-09:18:27.194 69f4 Generated table #113@0: 102 keys, 397860 bytes
+2024/10/25-09:18:27.194 69f4 Compacted 4@0 + 1@1 files => 397860 bytes
+2024/10/25-09:18:27.195 69f4 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/10/25-09:18:27.195 69f4 Delete type=2 #103
+2024/10/25-09:18:27.195 69f4 Delete type=2 #105
+2024/10/25-09:18:27.195 69f4 Delete type=2 #108
+2024/10/25-09:18:27.195 69f4 Delete type=2 #109
+2024/10/25-09:18:27.195 69f4 Delete type=2 #112
+2024/10/25-09:33:27.122 69f4 Level-0 table #115: started
+2024/10/25-09:33:27.126 69f4 Level-0 table #115: 32012 bytes OK
+2024/10/25-09:33:27.127 69f4 Delete type=0 #111
+2024/10/25-09:46:37.782 69f4 Level-0 table #117: started
+2024/10/25-09:46:37.785 69f4 Level-0 table #117: 33441 bytes OK
+2024/10/25-09:46:37.786 69f4 Delete type=0 #114
+2024/10/25-09:52:43.418 69f4 Level-0 table #119: started
+2024/10/25-09:52:43.421 69f4 Level-0 table #119: 39607 bytes OK
+2024/10/25-09:52:43.423 69f4 Delete type=0 #116
+2024/10/25-09:59:43.421 69f4 Level-0 table #121: started
+2024/10/25-09:59:43.424 69f4 Level-0 table #121: 39570 bytes OK
+2024/10/25-09:59:43.425 69f4 Delete type=0 #118
+2024/10/25-09:59:43.425 69f4 Compacting 4@0 + 1@1 files
+2024/10/25-09:59:43.433 69f4 Generated table #122@0: 106 keys, 398332 bytes
+2024/10/25-09:59:43.433 69f4 Compacted 4@0 + 1@1 files => 398332 bytes
+2024/10/25-09:59:43.435 69f4 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/10/25-09:59:43.435 69f4 Delete type=2 #113
+2024/10/25-09:59:43.435 69f4 Delete type=2 #115
+2024/10/25-09:59:43.435 69f4 Delete type=2 #117
+2024/10/25-09:59:43.435 69f4 Delete type=2 #119
+2024/10/25-09:59:43.435 69f4 Delete type=2 #121
+2024/10/25-10:07:27.127 69f4 Level-0 table #124: started
+2024/10/25-10:07:27.131 69f4 Level-0 table #124: 39185 bytes OK
+2024/10/25-10:07:27.132 69f4 Delete type=0 #120
+2024/10/25-10:14:43.408 69f4 Level-0 table #126: started
+2024/10/25-10:14:43.411 69f4 Level-0 table #126: 39450 bytes OK
+2024/10/25-10:14:43.412 69f4 Delete type=0 #123
+2024/10/25-10:21:27.118 69f4 Level-0 table #128: started
+2024/10/25-10:21:27.122 69f4 Level-0 table #128: 39693 bytes OK
+2024/10/25-10:21:27.124 69f4 Delete type=0 #125
+2024/10/25-23:22:55.337 69f4 Level-0 table #130: started
+2024/10/25-23:22:55.340 69f4 Level-0 table #130: 39078 bytes OK
+2024/10/25-23:22:55.341 69f4 Delete type=0 #127
+2024/10/25-23:22:55.341 69f4 Compacting 4@0 + 1@1 files
+2024/10/25-23:22:55.349 69f4 Generated table #131@0: 107 keys, 398371 bytes
+2024/10/25-23:22:55.349 69f4 Compacted 4@0 + 1@1 files => 398371 bytes
+2024/10/25-23:22:55.350 69f4 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/10/25-23:22:55.351 69f4 Delete type=2 #122
+2024/10/25-23:22:55.351 69f4 Delete type=2 #124
+2024/10/25-23:22:55.351 69f4 Delete type=2 #126
+2024/10/25-23:22:55.351 69f4 Delete type=2 #128
+2024/10/25-23:22:55.351 69f4 Delete type=2 #130
